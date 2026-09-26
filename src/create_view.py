@@ -1,31 +1,25 @@
-from sqlalchemy import create_engine, text
+import pandas as pd
 
-engine = create_engine("postgresql://postgres:admin@localhost:5432/iot_db")
+from config import get_engine, run_sql_file
 
-sql_queries = [
-    """
-    CREATE OR REPLACE VIEW vw_resumo_dispositivo AS
-    SELECT "out/in" AS device_id, AVG(temp) AS temp_media, COUNT(*) AS total_leituras
-    FROM temperature_readings
-    GROUP BY "out/in";
-    """,
-    """
-    CREATE OR REPLACE VIEW vw_anomalias AS
-    SELECT "out/in" AS ambiente, noted_date, temp
-    FROM temperature_readings
-    WHERE temp >= 40;
-    """,
-    """
-    CREATE OR REPLACE VIEW vw_tendencia AS
-    SELECT SUBSTRING(noted_date, 1, 10) AS data_leitura, MAX(temp) AS temp_max, MIN(temp) AS temp_min
-    FROM temperature_readings
-    GROUP BY SUBSTRING(noted_date, 1, 10);
-    """
+VIEWS = [
+    "vw_resumo_dispositivo",
+    "vw_anomalias",
+    "vw_tendencia",
+    "vw_leituras_por_hora",
 ]
 
-with engine.connect() as conn:
-    for query in sql_queries:
-        conn.execute(text(query))
-    conn.commit()
 
-print("As 3 Views foram criadas com sucesso no PostgreSQL!")
+def main() -> None:
+    engine = get_engine()
+    run_sql_file(engine, "view.sql")
+
+    for view in VIEWS:
+        total = pd.read_sql(f"SELECT COUNT(*) AS total FROM {view}", engine)
+        print(f"  {view}: {int(total['total'][0])} linha(s)")
+
+    print("Views criadas com sucesso! Agora execute: streamlit run src/app.py")
+
+
+if __name__ == "__main__":
+    main()
