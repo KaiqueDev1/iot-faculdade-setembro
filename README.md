@@ -28,6 +28,7 @@ iot-pipeline/
 ├── data/
 │   └── temperature_readings.csv   # dataset do Kaggle
 ├── docs/
+│   ├── relatorio/                 # relatório teórico em PDF
 │   └── screenshots/               # prints do dashboard
 ├── sql/
 │   ├── schema.sql                 # criação da tabela
@@ -139,6 +140,8 @@ Todas as views estão em [`sql/view.sql`](sql/view.sql).
 
 ## 🖼️ Dashboard
 
+![Visão geral do dashboard](docs/screenshots/00_dashboard_completo.png)
+
 | | |
 |---|---|
 | ![Indicadores e média por dispositivo](docs/screenshots/01_media_dispositivo.png) | ![Tendência diária](docs/screenshots/02_tendencia_diaria.png) |
@@ -158,6 +161,10 @@ Todas as views estão em [`sql/view.sql`](sql/view.sql).
 - Controle de climatização: ligar o ar-condicionado quando a temperatura externa passar de um limite.
 - Monitoramento da saúde dos sensores: detectar dias sem leitura e acionar a manutenção.
 - Em produção, a ingestão poderia ser em tempo real (MQTT/Kafka) no lugar do CSV.
+
+## 📄 Relatório
+
+O relatório da parte teórica (contextualização, passos, views, prints e insights) está em [`docs/relatorio/Relatorio_Pipeline_IoT.pdf`](docs/relatorio/Relatorio_Pipeline_IoT.pdf).
 
 ## 🔧 Comandos Git utilizados
 
