@@ -141,6 +141,10 @@ Todas as views estão em [`sql/view.sql`](sql/view.sql).
 ## 🖼️ Dashboard
 
 ![Visão geral do dashboard](docs/screenshots/00_dashboard_completo.png)
+<img width="2255" height="2039" alt="image" src="https://github.com/user-attachments/assets/c8aeb29f-127f-4197-b244-a19c4b504711" />
+<img width="2245" height="578" alt="image" src="https://github.com/user-attachments/assets/05bced83-0087-41e6-845e-64bc6c76a24d" />
+
+
 
 | | |
 |---|---|
